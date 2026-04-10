@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mini Click Game</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: rgb(255, 175, 175);
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        #gameArea {
+            width: 400px;
+            height: 400px;
+            margin: 20px auto;
+            background: #141313;
+            position: relative;
+            border: 2px solid rgb(255, 175, 175);
+        }
+
+        #box {
+            width: 50px;
+            height: 50px;
+            background-image: url(hakla.jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: absolute;
+            cursor: pointer;
+        }
+
+        #score {
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Catch Hakla Shakrukh</h1>
+    <p id="score">Score: 0</p>
+    <div id="gameArea">
+        <div id="box"></div>
+    </div>
+
+    <script>
+        const box = document.getElementById("box");
+        const scoreText = document.getElementById("score");
+        const gameArea = document.getElementById("gameArea");
+
+        let score = 0;
+
+        function moveBox() {
+            const maxX = gameArea.clientWidth - box.clientWidth;
+            const maxY = gameArea.clientHeight - box.clientHeight;
+
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+
+            box.style.left = randomX + "px";
+            box.style.top = randomY + "px";
+        }
+
+        box.addEventListener("click", () => {
+            score++;
+            scoreText.textContent = "Score: " + score;
+            moveBox();
+        });
+
+        // Move box every 1 second
+        setInterval(moveBox, 1000);
+
+        // Initial position
+        moveBox();
+    </script>
+
+</body>
+
+</html>
